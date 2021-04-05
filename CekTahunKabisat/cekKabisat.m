@@ -98,13 +98,18 @@ function submit_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 input = get (handles.input, 'string');
 input = str2double (input); 
-
-if  (mod(input,400) == 0)
-    set (handles.hasil,'String',('Tahun Kabisat'));
+if isempty(input) %jika user belum memasukkan angka
+    set (handles.hasil,'String',("BELUM INPUT!!!"));
+elseif ~isfinite(input) %jika user input selain angka
+    set (handles.hasil,'String',("INPUT ANGKA"));
+elseif  (mod(input,400) == 0)
+    set (handles.hasil,'String',("Tahun Kabisat"));
 elseif (mod(input,100) == 0)
-    set (handles.hasil,'String',('Bukan Tahun Kabisat'));
+    set (handles.hasil,'String',("Bukan Tahun Kabisat"));
 elseif (mod(input,4) == 0)
-    set (handles.hasil,'String',('Tahun Kabisat'));
+    set (handles.hasil,'String',("Tahun Kabisat"));
+else 
+    set (handles.hasil,'String',("Bukan Tahun Kabisat"));
 end
 
 function edit2_Callback(hObject, eventdata, handles)
